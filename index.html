@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quill</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- ── Google Fonts: 55 families across Serif, Sans-Serif, Display, Mono, Handwriting ── -->
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Barlow:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=Bitter:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@400;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Domine:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Figtree:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&family=Fredoka:wght@400;600&family=Great+Vibes&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=Inconsolata:wght@400;500&family=Inter:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&family=Josefin+Sans:ital,wght@0,400;0,600;1,400&family=Kalam:wght@400;700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lobster&family=Lora:ital,wght@0,400;0,600;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&family=Mulish:ital,wght@0,400;0,600;1,400&family=Nunito:ital,wght@0,400;0,600;1,400&family=Open+Sans:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;500;700&family=Outfit:wght@400;500;700&family=Pacifico&family=Patrick+Hand&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;1,400&family=Poppins:ital,wght@0,400;0,500;0,700;1,400&family=PT+Mono&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@400;500;700&family=Raleway:ital,wght@0,400;0,600;1,400&family=Righteous&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:ital,wght@0,400;0,500;1,400&family=Satisfy&family=Source+Code+Pro:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;1,400&family=Sora:wght@400;600&family=Ubuntu:ital,wght@0,400;0,700;1,400&family=Work+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       MENU BAR 
+  ═══════════════════════════════════════════ -->
+  <nav class="menubar" role="menubar" aria-label="Application menu">
+    <div class="menubar__brand">
+      <span class="menubar__logo" aria-hidden="true">✦</span>
+      <span class="menubar__app-name">Quill</span>
+    </div>
+
+    <div class="menubar__menus">
+      <!-- File Menu -->
+      <div class="menu" role="none">
+        <button class="menu__trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="file">File</button>
+        <div class="menu__dropdown" id="menu-file" role="menu" aria-label="File menu">
+          <button class="menu__item" role="menuitem" id="cmd-new" data-shortcut="⌘N">New Document</button>
+          <button class="menu__item" role="menuitem" id="cmd-open" data-shortcut="⌘O">Open File…</button>
+          <div class="menu__separator" role="separator"></div>
+          <button class="menu__item" role="menuitem" id="cmd-save-html" data-shortcut="⌘S">Save as HTML</button>
+          <button class="menu__item" role="menuitem" id="cmd-save-txt">Save as TXT</button>
+          <button class="menu__item" role="menuitem" id="cmd-export-pdf" data-shortcut="⌘P">Export as PDF</button>
+          <div class="menu__separator" role="separator"></div>
+          <button class="menu__item" role="menuitem" id="cmd-recent">Recent Documents</button>
+        </div>
+      </div>
+
+      <!-- Edit Menu -->
+      <div class="menu" role="none">
+        <button class="menu__trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="edit">Edit</button>
+        <div class="menu__dropdown" id="menu-edit" role="menu" aria-label="Edit menu">
+          <button class="menu__item" role="menuitem" id="cmd-undo" data-shortcut="⌘Z">Undo</button>
+          <button class="menu__item" role="menuitem" id="cmd-redo" data-shortcut="⌘⇧Z">Redo</button>
+          <div class="menu__separator" role="separator"></div>
+          <button class="menu__item" role="menuitem" id="cmd-cut" data-shortcut="⌘X">Cut</button>
+          <button class="menu__item" role="menuitem" id="cmd-copy" data-shortcut="⌘C">Copy</button>
+          <button class="menu__item" role="menuitem" id="cmd-paste" data-shortcut="⌘V">Paste</button>
+          <div class="menu__separator" role="separator"></div>
+          <button class="menu__item" role="menuitem" id="cmd-select-all" data-shortcut="⌘A">Select All</button>
+          <button class="menu__item" role="menuitem" id="cmd-find" data-shortcut="⌘F">Find &amp; Replace…</button>
+        </div>
+      </div>
+
+      <!-- View Menu -->
+      <div class="menu" role="none">
+        <button class="menu__trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="view">View</button>
+        <div class="menu__dropdown" id="menu-view" role="menu" aria-label="View menu">
+          <button class="menu__item" role="menuitem" id="cmd-zoom-in" data-shortcut="⌘+">Zoom In</button>
+          <button class="menu__item" role="menuitem" id="cmd-zoom-out" data-shortcut="⌘-">Zoom Out</button>
+          <button class="menu__item" role="menuitem" id="cmd-zoom-reset" data-shortcut="⌘0">Reset Zoom</button>
+          <div class="menu__separator" role="separator"></div>
+          <button class="menu__item" role="menuitem" id="cmd-fullscreen" data-shortcut="F11">Fullscreen</button>
+          <div class="menu__separator" role="separator"></div>
+          <button class="menu__item" role="menuitem" id="cmd-theme-light" data-theme-btn="light">☀ Light</button>
+          <button class="menu__item" role="menuitem" id="cmd-theme-dark" data-theme-btn="dark">☾ Dark</button>
+          <button class="menu__item" role="menuitem" id="cmd-theme-sepia" data-theme-btn="sepia">📜 Sepia</button>
+          <button class="menu__item" role="menuitem" id="cmd-theme-system" data-theme-btn="system">⚙ System</button>
+        </div>
+      </div>
+
+      <!-- Format Menu -->
+      <div class="menu" role="none">
+        <button class="menu__trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="format">Format</button>
+        <div class="menu__dropdown" id="menu-format" role="menu" aria-label="Format menu">
+          <button class="menu__item" role="menuitem" data-exec="bold" data-shortcut="⌘B">Bold</button>
+          <button class="menu__item" role="menuitem" data-exec="italic" data-shortcut="⌘I">Italic</button>
+          <button class="menu__item" role="menuitem" data-exec="underline" data-shortcut="⌘U">Underline</button>
+          <button class="menu__item" role="menuitem" data-exec="strikeThrough">Strikethrough</button>
+          <div class="menu__separator" role="separator"></div>
+          <button class="menu__item" role="menuitem" id="cmd-insert-link">Insert Link…</button>
+          <button class="menu__item" role="menuitem" id="cmd-insert-image">Insert Image…</button>
+          <button class="menu__item" role="menuitem" id="cmd-insert-table">Insert Table…</button>
+          <div class="menu__separator" role="separator"></div>
+          <button class="menu__item" role="menuitem" id="cmd-clear-format">Clear Formatting</button>
+        </div>
+      </div>
+
+      <!-- Help Menu -->
+      <div class="menu" role="none">
+        <button class="menu__trigger" role="menuitem" aria-haspopup="true" aria-expanded="false" data-menu="help">Help</button>
+        <div class="menu__dropdown" id="menu-help" role="menu" aria-label="Help menu">
+          <button class="menu__item" role="menuitem" id="cmd-shortcuts">Keyboard Shortcuts</button>
+          <button class="menu__item" role="menuitem" id="cmd-about">About Quill</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side: theme pill + doc title -->
+    <div class="menubar__right">
+      <div class="doc-title-wrapper">
+        <input type="text" id="doc-title" class="doc-title" value="Untitled Document" aria-label="Document title" spellcheck="false">
+      </div>
+      <div class="theme-switcher" role="group" aria-label="Theme">
+        <button class="theme-btn active" data-theme="light" title="Light" aria-pressed="true">☀</button>
+        <button class="theme-btn" data-theme="dark" title="Dark" aria-pressed="false">☾</button>
+        <button class="theme-btn" data-theme="sepia" title="Sepia" aria-pressed="false">📜</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       FORMATTING TOOLBAR
+  ═══════════════════════════════════════════ -->
+  <div class="toolbar" role="toolbar" aria-label="Formatting toolbar">
+
+    <!-- History -->
+    <div class="toolbar__group" role="group" aria-label="History">
+      <button class="toolbar__btn" id="tb-undo" data-exec="undo" title="Undo (⌘Z)" aria-label="Undo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
+      </button>
+      <button class="toolbar__btn" id="tb-redo" data-exec="redo" title="Redo (⌘⇧Z)" aria-label="Redo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14l5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg>
+      </button>
+    </div>
+
+    <div class="toolbar__divider" role="separator"></div>
+
+    <!-- Font family — custom picker with live hover preview -->
+    <div class="toolbar__group" role="group" aria-label="Font">
+      <div class="font-picker" id="font-picker">
+        <button class="font-picker__trigger" id="font-picker-trigger"
+                aria-haspopup="listbox" aria-expanded="false"
+                aria-label="Font family" title="Font family">
+          <span class="font-picker__label" id="font-picker-label">Georgia</span>
+          <svg class="font-picker__chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="font-picker__panel" id="font-picker-panel" role="listbox" aria-label="Font family" hidden>
+          <div class="font-picker__search-wrap">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7.5" cy="7.5" r="5"/><path d="M13 13l3 3"/></svg>
+            <input class="font-picker__search" id="font-picker-search"
+                   type="text" placeholder="Search fonts…" autocomplete="off"
+                   aria-label="Search fonts" spellcheck="false">
+          </div>
+          <div class="font-picker__list" id="font-picker-list" role="presentation">
+            <!-- populated by JS -->
+          </div>
+        </div>
+      </div>
+      <select class="toolbar__select toolbar__select--size" id="tb-size" aria-label="Font size">
+        <option value="1">8</option>
+        <option value="2">10</option>
+        <option value="3" selected>12</option>
+        <option value="4">14</option>
+        <option value="5">18</option>
+        <option value="6">24</option>
+        <option value="7">36</option>
+      </select>
+    </div>
+
+    <div class="toolbar__divider" role="separator"></div>
+
+    <!-- Style -->
+    <div class="toolbar__group" role="group" aria-label="Text style">
+      <button class="toolbar__btn" data-exec="bold" title="Bold (⌘B)" aria-label="Bold">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg>
+      </button>
+      <button class="toolbar__btn" data-exec="italic" title="Italic (⌘I)" aria-label="Italic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg>
+      </button>
+      <button class="toolbar__btn" data-exec="underline" title="Underline (⌘U)" aria-label="Underline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"/><line x1="4" y1="21" x2="20" y2="21"/></svg>
+      </button>
+      <button class="toolbar__btn" data-exec="strikeThrough" title="Strikethrough" aria-label="Strikethrough">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="4" y1="12" x2="20" y2="12"/><path d="M17.5 6A4.5 4.5 0 0 0 9 8c0 .83.32 1.57.83 2.13"/><path d="M6.5 18A4.5 4.5 0 0 0 15 16c0-.83-.32-1.57-.83-2.13"/></svg>
+      </button>
+    </div>
+
+    <div class="toolbar__divider" role="separator"></div>
+
+    <!-- Colors -->
+    <div class="toolbar__group" role="group" aria-label="Colors">
+      <label class="toolbar__color-btn" title="Text color" aria-label="Text color">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20h6"/><path d="M12 4l7 16H5l7-16z"/></svg>
+        <input type="color" id="tb-color" value="#1a1a2e" aria-label="Text color picker">
+        <div class="toolbar__color-indicator" id="color-indicator" style="background:#1a1a2e"></div>
+      </label>
+      <label class="toolbar__color-btn" title="Highlight color" aria-label="Highlight color">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <input type="color" id="tb-highlight" value="#fff176" aria-label="Highlight color picker">
+        <div class="toolbar__color-indicator" id="highlight-indicator" style="background:#fff176"></div>
+      </label>
+    </div>
+
+    <div class="toolbar__divider" role="separator"></div>
+
+    <!-- Alignment -->
+    <div class="toolbar__group" role="group" aria-label="Text alignment">
+      <button class="toolbar__btn" data-exec="justifyLeft" title="Align left" aria-label="Align left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/></svg>
+      </button>
+      <button class="toolbar__btn" data-exec="justifyCenter" title="Center" aria-label="Center align">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      </button>
+      <button class="toolbar__btn" data-exec="justifyRight" title="Align right" aria-label="Align right">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="9" y1="12" x2="21" y2="12"/><line x1="6" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <button class="toolbar__btn" data-exec="justifyFull" title="Justify" aria-label="Justify">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="toolbar__divider" role="separator"></div>
+
+    <!-- Lists & Indent -->
+    <div class="toolbar__group" role="group" aria-label="Lists and indentation">
+      <button class="toolbar__btn" data-exec="insertUnorderedList" title="Bullet list" aria-label="Bullet list">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1.5" fill="currentColor"/><circle cx="4" cy="12" r="1.5" fill="currentColor"/><circle cx="4" cy="18" r="1.5" fill="currentColor"/></svg>
+      </button>
+      <button class="toolbar__btn" data-exec="insertOrderedList" title="Numbered list" aria-label="Numbered list">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+      </button>
+      <button class="toolbar__btn" data-exec="outdent" title="Decrease indent" aria-label="Decrease indent">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="6" x2="11" y2="6"/><line x1="21" y1="12" x2="11" y2="12"/><line x1="21" y1="18" x2="11" y2="18"/><path d="M7 8l-4 4 4 4"/></svg>
+      </button>
+      <button class="toolbar__btn" data-exec="indent" title="Increase indent" aria-label="Increase indent">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="6" x2="11" y2="6"/><line x1="21" y1="12" x2="11" y2="12"/><line x1="21" y1="18" x2="11" y2="18"/><path d="M3 8l4 4-4 4"/></svg>
+      </button>
+    </div>
+
+    <div class="toolbar__divider" role="separator"></div>
+
+    <!-- Insert -->
+    <div class="toolbar__group" role="group" aria-label="Insert">
+      <button class="toolbar__btn" id="tb-link" title="Insert link" aria-label="Insert link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+      <button class="toolbar__btn" id="tb-image" title="Insert image" aria-label="Insert image">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </button>
+      <button class="toolbar__btn" id="tb-table" title="Insert table" aria-label="Insert table">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+      </button>
+      <button class="toolbar__btn" id="tb-pagebreak" title="Page break" aria-label="Page break">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12" stroke-dasharray="4 2"/><path d="M7 8l-4 4 4 4"/><path d="M17 8l4 4-4 4"/></svg>
+      </button>
+    </div>
+
+    <div class="toolbar__divider" role="separator"></div>
+
+    <!-- Line spacing -->
+    <div class="toolbar__group" role="group" aria-label="Line spacing">
+      <select class="toolbar__select" id="tb-linespacing" aria-label="Line spacing" title="Line spacing">
+        <option value="1">1×</option>
+        <option value="1.5" selected>1.5×</option>
+        <option value="2">2×</option>
+        <option value="2.5">2.5×</option>
+        <option value="3">3×</option>
+      </select>
+    </div>
+
+    <!-- Spacer -->
+    <div style="flex:1"></div>
+
+    <!-- Right-side toolbar actions -->
+    <div class="toolbar__group" role="group" aria-label="Document actions">
+      <button class="toolbar__btn toolbar__btn--accent" id="tb-save" title="Save (⌘S)" aria-label="Save document">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      </button>
+      <button class="toolbar__btn" id="tb-print" title="Print / Export PDF (⌘P)" aria-label="Print">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN LAYOUT
+  ═══════════════════════════════════════════ -->
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar" aria-label="Document settings">
+      <div class="sidebar__section">
+        <h3 class="sidebar__heading">Document</h3>
+        <label class="sidebar__label">Author
+          <input type="text" class="sidebar__input" id="meta-author" placeholder="Your name">
+        </label>
+        <label class="sidebar__label">Created
+          <input type="text" class="sidebar__input" id="meta-date" readonly>
+        </label>
+      </div>
+
+      <div class="sidebar__section">
+        <h3 class="sidebar__heading">Page</h3>
+        <label class="sidebar__label">Zoom
+          <div class="sidebar__zoom-row">
+            <button class="sidebar__zoom-btn" id="zoom-out" aria-label="Zoom out">−</button>
+            <span class="sidebar__zoom-value" id="zoom-value">100%</span>
+            <button class="sidebar__zoom-btn" id="zoom-in" aria-label="Zoom in">+</button>
+          </div>
+        </label>
+      </div>
+
+      <div class="sidebar__section">
+        <h3 class="sidebar__heading">Recent</h3>
+        <ul class="sidebar__recent" id="recent-list" aria-label="Recent documents">
+          <li class="sidebar__recent-empty">No recent documents</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- EDITOR CANVAS -->
+    <main class="editor-canvas" id="editor-canvas" role="main">
+      <!-- Drop zone indicator -->
+      <div class="drop-indicator" id="drop-indicator" aria-hidden="true">
+        <span>Drop file to open</span>
+      </div>
+
+      <!-- Paper / Page -->
+      <div class="page-wrapper">
+        <div
+          id="editor"
+          class="editor"
+          contenteditable="true"
+          role="textbox"
+          aria-multiline="true"
+          aria-label="Document content"
+          spellcheck="true"
+        ></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       STATUS BAR
+  ═══════════════════════════════════════════ -->
+  <footer class="statusbar" role="status" aria-live="polite">
+    <div class="statusbar__left">
+      <span id="status-msg" class="statusbar__msg">Ready</span>
+    </div>
+    <div class="statusbar__center">
+      <span id="status-words">0 words</span>
+      <span class="statusbar__dot" aria-hidden="true">·</span>
+      <span id="status-chars">0 characters</span>
+    </div>
+    <div class="statusbar__right">
+      <span id="status-autosave" class="statusbar__autosave"></span>
+      <button class="statusbar__zoom-btn" id="status-zoom-out" aria-label="Zoom out">−</button>
+      <span id="status-zoom" class="statusbar__zoom">100%</span>
+      <button class="statusbar__zoom-btn" id="status-zoom-in" aria-label="Zoom in">+</button>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       FLOATING TOOLBAR (appears on selection)
+  ═══════════════════════════════════════════ -->
+  <div class="float-toolbar" id="float-toolbar" role="toolbar" aria-label="Quick format" aria-hidden="true" hidden>
+    <button class="float-toolbar__btn" data-exec="bold" title="Bold" aria-label="Bold">B</button>
+    <button class="float-toolbar__btn float-toolbar__btn--italic" data-exec="italic" title="Italic" aria-label="Italic">I</button>
+    <button class="float-toolbar__btn float-toolbar__btn--under" data-exec="underline" title="Underline" aria-label="Underline">U</button>
+    <button class="float-toolbar__btn float-toolbar__btn--strike" data-exec="strikeThrough" title="Strikethrough" aria-label="Strikethrough">S</button>
+    <div class="float-toolbar__sep" role="separator"></div>
+    <button class="float-toolbar__btn" id="float-link" title="Link" aria-label="Insert link">⎘</button>
+    <button class="float-toolbar__btn float-toolbar__btn--clear" data-exec="removeFormat" title="Clear format" aria-label="Clear format">✕</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MODAL BACKDROP
+  ═══════════════════════════════════════════ -->
+  <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true"></div>
+
+  <!-- FIND & REPLACE MODAL -->
+  <div class="modal" id="modal-find" role="dialog" aria-modal="true" aria-labelledby="find-title" hidden>
+    <div class="modal__header">
+      <h2 class="modal__title" id="find-title">Find &amp; Replace</h2>
+      <button class="modal__close" data-close-modal aria-label="Close">✕</button>
+    </div>
+    <div class="modal__body">
+      <label class="modal__label">Find
+        <input type="text" class="modal__input" id="find-input" placeholder="Search text…" autocomplete="off">
+      </label>
+      <label class="modal__label">Replace with
+        <input type="text" class="modal__input" id="replace-input" placeholder="Replacement…" autocomplete="off">
+      </label>
+      <div class="modal__find-info" id="find-info"></div>
+    </div>
+    <div class="modal__footer">
+      <button class="modal__btn modal__btn--ghost" id="find-prev">← Prev</button>
+      <button class="modal__btn modal__btn--ghost" id="find-next">Next →</button>
+      <button class="modal__btn modal__btn--ghost" id="replace-one">Replace</button>
+      <button class="modal__btn modal__btn--primary" id="replace-all">Replace All</button>
+    </div>
+  </div>
+
+  <!-- LINK MODAL -->
+  <div class="modal" id="modal-link" role="dialog" aria-modal="true" aria-labelledby="link-title" hidden>
+    <div class="modal__header">
+      <h2 class="modal__title" id="link-title">Insert Link</h2>
+      <button class="modal__close" data-close-modal aria-label="Close">✕</button>
+    </div>
+    <div class="modal__body">
+      <label class="modal__label">Display text
+        <input type="text" class="modal__input" id="link-text" placeholder="Link text">
+      </label>
+      <label class="modal__label">URL
+        <input type="url" class="modal__input" id="link-url" placeholder="https://…">
+      </label>
+    </div>
+    <div class="modal__footer">
+      <button class="modal__btn modal__btn--ghost" data-close-modal>Cancel</button>
+      <button class="modal__btn modal__btn--primary" id="link-insert">Insert</button>
+    </div>
+  </div>
+
+  <!-- IMAGE MODAL -->
+  <div class="modal" id="modal-image" role="dialog" aria-modal="true" aria-labelledby="image-title" hidden>
+    <div class="modal__header">
+      <h2 class="modal__title" id="image-title">Insert Image</h2>
+      <button class="modal__close" data-close-modal aria-label="Close">✕</button>
+    </div>
+    <div class="modal__body">
+      <label class="modal__label">Image URL
+        <input type="url" class="modal__input" id="image-url" placeholder="https://example.com/image.png">
+      </label>
+      <div class="modal__or">— or —</div>
+      <label class="modal__upload-label" id="image-upload-label">
+        <input type="file" id="image-file" accept="image/*" aria-label="Upload image">
+        <span>📁 Choose file from device</span>
+      </label>
+    </div>
+    <div class="modal__footer">
+      <button class="modal__btn modal__btn--ghost" data-close-modal>Cancel</button>
+      <button class="modal__btn modal__btn--primary" id="image-insert">Insert</button>
+    </div>
+  </div>
+
+  <!-- TABLE MODAL -->
+  <div class="modal" id="modal-table" role="dialog" aria-modal="true" aria-labelledby="table-title" hidden>
+    <div class="modal__header">
+      <h2 class="modal__title" id="table-title">Insert Table</h2>
+      <button class="modal__close" data-close-modal aria-label="Close">✕</button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__row">
+        <label class="modal__label">Rows
+          <input type="number" class="modal__input modal__input--small" id="table-rows" value="3" min="1" max="20">
+        </label>
+        <label class="modal__label">Columns
+          <input type="number" class="modal__input modal__input--small" id="table-cols" value="3" min="1" max="10">
+        </label>
+      </div>
+      <label class="modal__label modal__checkbox-label">
+        <input type="checkbox" id="table-header" checked>
+        Include header row
+      </label>
+    </div>
+    <div class="modal__footer">
+      <button class="modal__btn modal__btn--ghost" data-close-modal>Cancel</button>
+      <button class="modal__btn modal__btn--primary" id="table-insert">Insert Table</button>
+    </div>
+  </div>
+
+  <!-- SHORTCUTS MODAL -->
+  <div class="modal modal--wide" id="modal-shortcuts" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title" hidden>
+    <div class="modal__header">
+      <h2 class="modal__title" id="shortcuts-title">Keyboard Shortcuts</h2>
+      <button class="modal__close" data-close-modal aria-label="Close">✕</button>
+    </div>
+    <div class="modal__body modal__body--shortcuts">
+      <div class="shortcuts-grid">
+        <div class="shortcut-col">
+          <h4>Formatting</h4>
+          <div class="shortcut"><kbd>⌘B</kbd><span>Bold</span></div>
+          <div class="shortcut"><kbd>⌘I</kbd><span>Italic</span></div>
+          <div class="shortcut"><kbd>⌘U</kbd><span>Underline</span></div>
+          <div class="shortcut"><kbd>⌘⇧X</kbd><span>Strikethrough</span></div>
+          <div class="shortcut"><kbd>⌘\</kbd><span>Clear formatting</span></div>
+        </div>
+        <div class="shortcut-col">
+          <h4>File</h4>
+          <div class="shortcut"><kbd>⌘N</kbd><span>New document</span></div>
+          <div class="shortcut"><kbd>⌘O</kbd><span>Open file</span></div>
+          <div class="shortcut"><kbd>⌘S</kbd><span>Save as HTML</span></div>
+          <div class="shortcut"><kbd>⌘P</kbd><span>Print / PDF</span></div>
+        </div>
+        <div class="shortcut-col">
+          <h4>Edit</h4>
+          <div class="shortcut"><kbd>⌘Z</kbd><span>Undo</span></div>
+          <div class="shortcut"><kbd>⌘⇧Z</kbd><span>Redo</span></div>
+          <div class="shortcut"><kbd>⌘F</kbd><span>Find &amp; Replace</span></div>
+          <div class="shortcut"><kbd>⌘A</kbd><span>Select All</span></div>
+        </div>
+        <div class="shortcut-col">
+          <h4>View</h4>
+          <div class="shortcut"><kbd>⌘+</kbd><span>Zoom In</span></div>
+          <div class="shortcut"><kbd>⌘−</kbd><span>Zoom Out</span></div>
+          <div class="shortcut"><kbd>⌘0</kbd><span>Reset Zoom</span></div>
+          <div class="shortcut"><kbd>F11</kbd><span>Fullscreen</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT MODAL -->
+  <div class="modal" id="modal-about" role="dialog" aria-modal="true" aria-labelledby="about-title" hidden>
+    <div class="modal__header">
+      <h2 class="modal__title" id="about-title">About Quill</h2>
+      <button class="modal__close" data-close-modal aria-label="Close">✕</button>
+    </div>
+    <div class="modal__body modal__body--center">
+      <div class="about-logo">✦</div>
+      <h3 class="about-name">Quill</h3>
+      <p class="about-tagline">A premium document editor.</p>
+      <p class="about-version">Version 1.0 · Pure HTML, CSS & JS</p>
+    </div>
+  </div>
+
+  <!-- Hidden file input for Open -->
+  <input type="file" id="open-file-input" accept=".txt,.html,.htm" style="display:none" aria-label="Open file">
+
+  <script src="script.js"></script>
+</body>
+</html>
