@@ -3,7 +3,7 @@
 
 Quill is a modern, production-ready rich text editor built with pure HTML, CSS, and Vanilla JavaScript.
 
-It delivers a refined, Apple-inspired interface with advanced editing tools, theme support, autosave, zoom control, file export, and more, all running fully in the browser.
+It delivers a refined, user-friendly interface with advanced editing tools, theme support, autosave, zoom control, file export, and more, all running fully in the browser.
 
 ---
 
