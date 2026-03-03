@@ -75,7 +75,7 @@ No frameworks. No dependencies. Fully standalone.
 
 ---
 ## Video Preview
-<video src="videos/live-font-swap.mp4" autoplay loop muted playinline width="100%"></video>
+<video src="videos/live-font-swap.mp4" width="100%" controls></video>
 
 ---
 
