@@ -1,5 +1,5 @@
 # Quill
-**Premium Web WordPad**
+**Fantastic Web WordPad**
 
 Quill is a modern, production-ready rich text editor built with pure HTML, CSS, and Vanilla JavaScript.
 
