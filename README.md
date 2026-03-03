@@ -75,7 +75,7 @@ No frameworks. No dependencies. Fully standalone.
 
 ---
 ## Video Preview
-<video src="videos/live-font-swap.mp4" width="100%" controls></video>
+<video src="https://github.com/KitchenEngineer1332/quill/blob/main/videos/live-font-swap.mp4" width="100%" controls></video>
 
 ---
 
